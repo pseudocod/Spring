@@ -1,0 +1,1 @@
+This Spring project implements CRUD (Create, Read, Update, Delete) operations using Data Access Objects (DAOs) and utilizes an H2 database. It serves as a foundation for managing persistent data in a Spring-based application.
