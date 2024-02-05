@@ -11,7 +11,7 @@ public final class TestDataUtil {
         Author author = Author.builder()
                 .id(1L)
                 .name("Mircea Bravo")
-                .age(35)
+                .age(55)
                 .build();
         return author;
     }
@@ -34,27 +34,27 @@ public final class TestDataUtil {
         return author;
     }
 
-    public static Book createTestBookA() {
+    public static Book createTestBookA(final Author author) {
         Book book = Book.builder().
                 isbn("978-1-2345-6789-0")
                 .title("Puterea Prezentului")
-                .authorId(1L)
+                .author(author)
                 .build();
         return book;
     }
-    public static Book createTestBookB() {
+    public static Book createTestBookB(final Author author) {
         Book book = Book.builder().
                 isbn("978-1-2345-6789-1")
                 .title("Harry Potter")
-                .authorId(1L)
+                .author(author)
                 .build();
         return book;
     }
-    public static Book createTestBookC() {
+    public static Book createTestBookC(final Author author) {
         Book book = Book.builder().
                 isbn("978-1-2345-6789-2")
                 .title("Jurgen Klopp")
-                .authorId(1L)
+                .author(author)
                 .build();
         return book;
     }
