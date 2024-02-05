@@ -1,62 +1,62 @@
 package com.example.database;
 
-import com.example.database.domain.Author;
-import com.example.database.domain.Book;
+import com.example.database.domain.entities.AuthorEntity;
+import com.example.database.domain.entities.BookEntity;
 
 public final class TestDataUtil {
     private TestDataUtil() {
     }
 
-    public static Author createTestAuthorA() {
-        Author author = Author.builder()
+    public static AuthorEntity createTestAuthorA() {
+        AuthorEntity authorEntity = AuthorEntity.builder()
                 .id(1L)
                 .name("Mircea Bravo")
                 .age(55)
                 .build();
-        return author;
+        return authorEntity;
     }
 
-    public static Author createTestAuthorB() {
-        Author author = Author.builder()
+    public static AuthorEntity createTestAuthorB() {
+        AuthorEntity authorEntity = AuthorEntity.builder()
                 .id(2L)
                 .name("Mohamed Salah")
                 .age(30)
                 .build();
-        return author;
+        return authorEntity;
     }
 
-    public static Author createTestAuthorC() {
-        Author author = Author.builder()
+    public static AuthorEntity createTestAuthorC() {
+        AuthorEntity authorEntity = AuthorEntity.builder()
                 .id(3L)
                 .name("Darwin Nunez")
                 .age(24)
                 .build();
-        return author;
+        return authorEntity;
     }
 
-    public static Book createTestBookA(final Author author) {
-        Book book = Book.builder().
+    public static BookEntity createTestBookA(final AuthorEntity authorEntity) {
+        BookEntity bookEntity = BookEntity.builder().
                 isbn("978-1-2345-6789-0")
                 .title("Puterea Prezentului")
-                .author(author)
+                .authorEntity(authorEntity)
                 .build();
-        return book;
+        return bookEntity;
     }
-    public static Book createTestBookB(final Author author) {
-        Book book = Book.builder().
+    public static BookEntity createTestBookB(final AuthorEntity authorEntity) {
+        BookEntity bookEntity = BookEntity.builder().
                 isbn("978-1-2345-6789-1")
                 .title("Harry Potter")
-                .author(author)
+                .authorEntity(authorEntity)
                 .build();
-        return book;
+        return bookEntity;
     }
-    public static Book createTestBookC(final Author author) {
-        Book book = Book.builder().
+    public static BookEntity createTestBookC(final AuthorEntity authorEntity) {
+        BookEntity bookEntity = BookEntity.builder().
                 isbn("978-1-2345-6789-2")
                 .title("Jurgen Klopp")
-                .author(author)
+                .authorEntity(authorEntity)
                 .build();
-        return book;
+        return bookEntity;
     }
     
 }
