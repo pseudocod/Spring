@@ -1,2 +1,2 @@
-# JPA Implementation
-Spring App with JPA implementation for CRUD operations.
+# Rest API Implementation
+Rest API Implementation. 
