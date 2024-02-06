@@ -1,5 +1,7 @@
 package com.example.database;
 
+import com.example.database.domain.dto.AuthorDto;
+import com.example.database.domain.dto.BookDto;
 import com.example.database.domain.entities.AuthorEntity;
 import com.example.database.domain.entities.BookEntity;
 
@@ -34,13 +36,20 @@ public final class TestDataUtil {
         return authorEntity;
     }
 
-    public static BookEntity createTestBookA(final AuthorEntity authorEntity) {
+    public static BookEntity createTestBookEntityA(final AuthorEntity authorEntity) {
         BookEntity bookEntity = BookEntity.builder().
                 isbn("978-1-2345-6789-0")
                 .title("Puterea Prezentului")
                 .authorEntity(authorEntity)
                 .build();
         return bookEntity;
+    }
+    public static BookDto createTestBookDtoA(final AuthorDto author) {
+        return BookDto.builder().
+                isbn("978-1-2345-6789-0")
+                .title("Puterea Prezentului")
+                .author(author)
+                .build();
     }
     public static BookEntity createTestBookB(final AuthorEntity authorEntity) {
         BookEntity bookEntity = BookEntity.builder().
