@@ -5,12 +5,12 @@ import com.example.database.domain.entities.BookEntity;
 import com.example.database.mappers.Mapper;
 import com.example.database.services.BookService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 public class BookController {
@@ -24,10 +24,34 @@ public class BookController {
     }
 
     @PutMapping("/books/{isbn}")
-    public ResponseEntity<BookDto> createBook(@PathVariable("isbn") String isbn, @RequestBody BookDto bookDto) {
+    public ResponseEntity<BookDto> createUpdateBook(@PathVariable("isbn") String isbn, @RequestBody BookDto bookDto) {
         BookEntity bookEntity = bookMapper.mapFrom(bookDto);
-        BookEntity savedBookEntity = bookService.createBook(isbn, bookEntity);
+        boolean bookExists = bookService.isExists(isbn);
+        BookEntity savedBookEntity = bookService.createUpdateBook(isbn, bookEntity);
         BookDto savedBookDto = bookMapper.mapTo(savedBookEntity);
-        return new ResponseEntity<>(savedBookDto, HttpStatus.CREATED);
+
+        if (bookExists) {
+            return new ResponseEntity<>(savedBookDto, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(savedBookDto, HttpStatus.CREATED);
+        }
+    }
+    @GetMapping(path = "/books")
+    public List<BookDto> listBooks() {
+        List<BookEntity> books = bookService.findAll();
+        return books.stream()
+                .map(bookMapper::mapTo)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping(path = "/books/{isbn}")
+    public ResponseEntity<BookDto> getBook(@PathVariable("isbn") String isbn) {
+        Optional<BookEntity> foundBook = bookService.findOne(isbn);
+        return foundBook.map(
+                bookEntity -> {
+                    BookDto bookDto = bookMapper.mapTo(bookEntity);
+                    return new ResponseEntity<>(bookDto, HttpStatus.OK);
+                }
+        ).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

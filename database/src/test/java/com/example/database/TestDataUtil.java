@@ -9,7 +9,7 @@ public final class TestDataUtil {
     private TestDataUtil() {
     }
 
-    public static AuthorEntity createTestAuthorA() {
+    public static AuthorEntity createTestAuthorEntityA() {
         AuthorEntity authorEntity = AuthorEntity.builder()
                 .id(1L)
                 .name("Mircea Bravo")
@@ -18,7 +18,17 @@ public final class TestDataUtil {
         return authorEntity;
     }
 
-    public static AuthorEntity createTestAuthorB() {
+    public static AuthorDto createTestAuthorDtoA() {
+        AuthorDto authorDto = AuthorDto.builder()
+                .id(1L)
+                .name("Mircea Bravo")
+                .age(55)
+                .build();
+
+        return authorDto;
+    }
+
+    public static AuthorEntity createTestAuthorEntityB() {
         AuthorEntity authorEntity = AuthorEntity.builder()
                 .id(2L)
                 .name("Mohamed Salah")
@@ -27,7 +37,7 @@ public final class TestDataUtil {
         return authorEntity;
     }
 
-    public static AuthorEntity createTestAuthorC() {
+    public static AuthorEntity createTestAuthorEntityC() {
         AuthorEntity authorEntity = AuthorEntity.builder()
                 .id(3L)
                 .name("Darwin Nunez")
@@ -51,7 +61,7 @@ public final class TestDataUtil {
                 .author(author)
                 .build();
     }
-    public static BookEntity createTestBookB(final AuthorEntity authorEntity) {
+    public static BookEntity createTestBookEntityB(final AuthorEntity authorEntity) {
         BookEntity bookEntity = BookEntity.builder().
                 isbn("978-1-2345-6789-1")
                 .title("Harry Potter")
@@ -59,7 +69,7 @@ public final class TestDataUtil {
                 .build();
         return bookEntity;
     }
-    public static BookEntity createTestBookC(final AuthorEntity authorEntity) {
+    public static BookEntity createTestBookEntityC(final AuthorEntity authorEntity) {
         BookEntity bookEntity = BookEntity.builder().
                 isbn("978-1-2345-6789-2")
                 .title("Jurgen Klopp")
