@@ -4,8 +4,6 @@ import com.example.database.domain.dto.BookDto;
 import com.example.database.domain.entities.BookEntity;
 import com.example.database.mappers.Mapper;
 import com.example.database.services.BookService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,11 +38,18 @@ public class BookController {
         }
     }
     @GetMapping(path = "/books")
-    public Page<BookDto> listBooks(Pageable pageable) {
-        Page<BookEntity> books = bookService.findAll(pageable);
-        return books.map(bookMapper::mapTo);
+    public List<BookDto> listBooks() {
+        List<BookEntity> books = bookService.findAll();
+        return books.stream()
+                .map(bookMapper::mapTo)
+                .collect(Collectors.toList());
     }
-
+    // USING PAGINATION
+    //    @GetMapping(path = "/books")
+    //    public Page<BookDto> listBooks(Pageable pageable) {
+    //        Page<BookEntity> books = bookService.findAll(pageable);
+    //        return books.map(bookMapper::mapTo);
+    //    }
     @GetMapping(path = "/books/{isbn}")
     public ResponseEntity<BookDto> getBook(@PathVariable("isbn") String isbn) {
         Optional<BookEntity> foundBook = bookService.findOne(isbn);
